@@ -8,7 +8,7 @@ class SingleMotionDetector:
 		self.bg = None
 
 	def update(self, image):
-		if self.bg == None:
+		if self.bg is None:
 			self.bg = image.copy().astype("float")
 			return
 
@@ -17,7 +17,7 @@ class SingleMotionDetector:
 
 	def detect(self, image, tVal=25):
 		delta = cv2.absdiff(self.bg.astype("uint8"), image)
-		thresh = cs2.threshold(delta, tVal, 255, cv2.THRESH_BINARY)[1]
+		thresh = cv2.threshold(delta, tVal, 255, cv2.THRESH_BINARY)[1]
 
 		# Erosions and dilations to remove small blobs
 		thresh = cv2.erode(thresh, None, iterations=2)
